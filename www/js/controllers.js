@@ -21,7 +21,7 @@ angular.module('app.controllers', [])
     };
   })
 
-  .controller('SignInCtrl', function ($scope, Auth, $state, $ionicHistory, $ionicLoading, $window, $firebaseAuth) {
+  .controller('SignInCtrl', function ($scope, Auth, $state, $ionicHistory, $ionicLoading, $window, $firebaseAuth, $ionicPopup) {
 
     var auth = $firebaseAuth();
 
@@ -48,13 +48,17 @@ angular.module('app.controllers', [])
       });
 
       if (getProvider === 'facebook') {
+        // facebook provides email
         provider = new firebase.auth.FacebookAuthProvider();
       } else if (getProvider === 'google') {
+        // google provides email
         provider = new firebase.auth.GoogleAuthProvider();
+        // cant get the users email from twitter
       } else if (getProvider === 'twitter') {
         provider = new firebase.auth.TwitterAuthProvider();
       } else if (getProvider === 'github') {
         // https://github.com/settings/applications/new
+        // can only get the email address is it has been set to public
         provider = new firebase.auth.GithubAuthProvider();
         //provider.addScope('user:email');
       }
@@ -64,6 +68,7 @@ angular.module('app.controllers', [])
         $ionicLoading.hide();
         $state.go('app.dashboard');
       }).catch(function (error) {
+        $ionicLoading.hide();
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -71,6 +76,13 @@ angular.module('app.controllers', [])
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
+
+        $ionicPopup.alert({
+            title: 'Woops!',
+            template: '<p>' + errorMessage + '</p><p><strong class="text-center">' + email + '</strong></p>'
+          });
+
+        console.log(errorMessage);
       });
     };
   })

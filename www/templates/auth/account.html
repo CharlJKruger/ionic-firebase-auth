@@ -3,8 +3,12 @@
     <ion-list>
 
       <ion-item class="item-avatar">
-        <img src="{{ signedInUser.photoURL }}">
-        <h2>{{ profile.name }}</h2>
+
+        <img ng-if="signedInUser.photoURL" src="{{ signedInUser.photoURL }}">
+        <img ng-if="!signedInUser.photoURL" src="img/user.jpeg">
+
+        <h2 ng-if="signedInUser.displayName">{{ signedInUser.displayName }}</h2>
+        <h2 ng-if="!signedInUser.displayName">{{ profile.name }}</h2>
         <p>{{ signedInUser.email }}</p>
       </ion-item>
 
