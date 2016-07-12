@@ -2,21 +2,24 @@
   <ion-content>
     <ion-list>
 
-      <label class="item item-input">
+      <ion-item class="item-avatar">
+        <img src="img/mcfly.jpg">
+        <h2>{{ profile.name }}</h2>
+        <p>{{ signedInUser.email }}</p>
+      </ion-item>
+
+      <ion-item class="item-divider">
+        Edit Account
+      </ion-item>
+
+      <ion-item class="item-input item-floating-label">
+        <span class="input-label">Name</span>
         <input type="text" ng-model="profile.name" ng-change="profile.$save()" placeholder="Name">
-      </label>
-
-      <br>
-
-      <label class="item item-input">
-        <input type="email" placeholder="Email" ng-model="signedInUser.email" placeholder="Email">
-      </label>
-
-      <br>
+      </ion-item>
 
       <ion-list>
 
-        <li class="item item-toggle">
+        <ion-item class="item-toggle">
           Example Setting
           <label class="toggle toggle-positive">
             <input type="checkbox" ng-model="profile.setting" ng-change="profile.$save()">
@@ -24,7 +27,7 @@
               <div class="handle"></div>
             </div>
           </label>
-        </li>
+        </ion-item>
 
         </ion-list>
 

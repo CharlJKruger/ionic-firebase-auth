@@ -1,8 +1,12 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <h2>Hi {{ signedInUser.email }}</h2>
+    <h2>Hi there!</h2>
     <p>
-      For help sending push notifications, join the <a href="https://apps.ionic.io/signup" target="_blank">Ionic Platform</a> and check out <a href="http://docs.ionic.io/docs/push-overview" target="_blank">Ionic Push</a>. We also have other services available.
+      You are currently singed in as {{ signedInUser.email }}
+    </p>
+    <p ng-hide="profile.name">
+      There are some additional account setting,<br>
+      please <a href="#/app/account">Update your account</a>
     </p>
   </ion-content>
 </ion-view>
