@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-dark">
       <ion-nav-back-button>
@@ -19,21 +19,22 @@
     <ion-content>
       <ion-list>
 
-        <ion-item menu-close href="#/app/dash" class="item-icon-right">
-          <i class="ion-home"></i>
+        <ion-item menu-close href="#/app/dash">
           Dashboard
         </ion-item>
 
-        <ion-item menu-close href="#/app/account" class="item-icon-right">
-          <i class="ion-gear-b"></i>
+        <ion-item menu-close href="#/app/account">
           Account
         </ion-item>
 
-        <ion-item menu-close ng-click="logout()" class="item-icon-right">
-          <i class="ion-reply"></i>
-          Logout
-        </ion-item>
       </ion-list>
     </ion-content>
+
+    <ion-footer-bar class="bar-assertive" ng-click="logout()">
+      <h2 class="title">
+        Sing out
+      </h2>
+    </ion-footer-bar>
+
   </ion-side-menu>
 </ion-side-menus>

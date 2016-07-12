@@ -11,6 +11,8 @@ angular.module('app.controllers', [])
       var ref = firebase.database().ref().child('users');
       $scope.profile = $firebaseObject(ref.child(firebaseUser.uid));
 
+      console.log($scope.signedInUser);
+
     });
 
     $scope.logout = function () {
@@ -41,6 +43,9 @@ angular.module('app.controllers', [])
 
     $scope.singInSocial = function (getProvider) {
       var provider = null;
+      $ionicLoading.show({
+        template: 'Signing in'
+      });
 
       if (getProvider === 'facebook') {
         provider = new firebase.auth.FacebookAuthProvider();
@@ -49,11 +54,15 @@ angular.module('app.controllers', [])
       } else if (getProvider === 'twitter') {
         provider = new firebase.auth.TwitterAuthProvider();
       } else if (getProvider === 'github') {
+        // https://github.com/settings/applications/new
         provider = new firebase.auth.GithubAuthProvider();
+        //provider.addScope('user:email');
       }
 
       firebase.auth().signInWithPopup(provider).then(function (result) {
         $scope.signedInUser = result.user;
+        $ionicLoading.hide();
+        $state.go('app.dashboard');
       }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;

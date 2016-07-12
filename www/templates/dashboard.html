@@ -1,12 +1,20 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <h2>Hi there!</h2>
-    <p>
-      You are currently singed in as {{ signedInUser.email }}
+    <h2 class="text-center">
+      Hi there!
+    </h2>
+
+    <p class="text-center">
+      You are currently singed in as <strong>{{ signedInUser.email }}</strong>
     </p>
-    <p ng-hide="profile.name">
-      There are some additional account setting,<br>
-      please <a href="#/app/account">Update your account</a>
-    </p>
+
+    <div ng-hide="profile.name" class="text-center">
+      <p>
+        There are some additional account setting, please update them.
+      </p>
+
+      <a href="#/app/account" class="button button-positive">Edit Account</a>
+    </div>
+
   </ion-content>
 </ion-view>
