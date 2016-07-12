@@ -1,0 +1,36 @@
+<ion-view title="Create Account" class="auth" hide-nav-bar="true">
+  <ion-content overflow-scroll="true" padding="true">
+
+    <img class="logo" src="img/ionic.png" alt="">
+    <div class="list">
+
+      <label class="item item-input">
+        <input type="text" placeholder="Name" ng-model="user.name">
+      </label>
+
+      <br>
+
+      <label class="item item-input">
+        <input type="email" placeholder="Email" ng-model="user.email">
+      </label>
+
+      <br/>
+
+      <label class="item item-input">
+        <input type="password" placeholder="Password" ng-model="user.pass">
+      </label>
+
+      <br>
+
+      <button class="button button-block button-assertive login" ng-click="createUser(user)">
+        Create account
+      </button>
+
+      <a class="button button-block button-clear button-positive" href='#/signin'>
+        Sign in
+      </a>
+
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,42 @@
+<ion-view title="Sign in" class="auth" hide-nav-bar="true">
+  <ion-content class="padding">
+
+    <img class="logo" src="img/ionic.png" alt="">
+    <div class="list">
+
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="Email" ng-model="user.email">
+      </label>
+
+      <br>
+
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Password</span>
+        <input type="password" placeholder="Password" ng-model="user.pass">
+      </label>
+
+      <br/>
+
+      <button class="button button-block button-positive login" ng-click="signIn(user)">
+        Sign in
+      </button>
+
+      <h5 class="text-center">Or</h5>
+
+      <button class="button button-block button-positive login" ng-click="singInSocial('facebook')">
+        Faceboook
+      </button>
+
+      <button class="button button-block button-positive login" ng-click="singInSocial('google')">
+        Google
+      </button>
+
+      <button class="button button-block button-clear button-positive" ui-sref='create'>
+        Create account
+      </button>
+
+    </div>
+
+  </ion-content>
+</ion-view>
