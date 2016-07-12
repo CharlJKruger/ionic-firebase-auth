@@ -1,9 +1,40 @@
 <ion-view view-title="Account">
   <ion-content>
     <ion-list>
-    <ion-toggle  ng-model="settings.enableFriends">
-        Enable Friends
-    </ion-toggle>
+
+      <label class="item item-input">
+        <input type="text" ng-model="profile.name" ng-change="profile.$save()" placeholder="Name">
+      </label>
+
+      <br>
+
+      <label class="item item-input">
+        <input type="email" placeholder="Email" ng-model="signedInUser.email" placeholder="Email">
+      </label>
+
+      <br>
+
+      <ion-list>
+
+        <li class="item item-toggle">
+          Example Setting
+          <label class="toggle toggle-positive">
+            <input type="checkbox" ng-model="profile.setting" ng-change="profile.$save()">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+        </ion-list>
+
     </ion-list>
   </ion-content>
+
+  <ion-footer-bar class="bar-assertive" ng-click="resetPassword()">
+    <h2 class="title">
+      Reset password
+    </h2>
+  </ion-footer-bar>
+
 </ion-view>

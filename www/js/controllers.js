@@ -8,14 +8,8 @@ angular.module('app.controllers', [])
     $scope.auth.$onAuthStateChanged(function (firebaseUser) {
       $scope.signedInUser = firebaseUser;
 
-      if(typeof firebaseUser != 'undefined') {
-        return;
-      }
-
       var ref = firebase.database().ref().child('users');
       $scope.profile = $firebaseObject(ref.child(firebaseUser.uid));
-
-      console.log($scope.signedInUser);
 
     });
 
@@ -26,7 +20,7 @@ angular.module('app.controllers', [])
   })
 
   .controller('SignInCtrl', function ($scope, Auth, $state, $ionicHistory, $ionicLoading, $window, $firebaseAuth) {
-    
+
     var auth = $firebaseAuth();
 
     $scope.signIn = function (user) {
@@ -52,6 +46,10 @@ angular.module('app.controllers', [])
         provider = new firebase.auth.FacebookAuthProvider();
       } else if (getProvider === 'google') {
         provider = new firebase.auth.GoogleAuthProvider();
+      } else if (getProvider === 'twitter') {
+        provider = new firebase.auth.TwitterAuthProvider();
+      } else if (getProvider === 'github') {
+        provider = new firebase.auth.GithubAuthProvider();
       }
 
       firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -68,7 +66,7 @@ angular.module('app.controllers', [])
     };
   })
 
-  .controller('CreateUserCtrl', function ($scope) {
+  .controller('CreateUserCtrl', function ($scope, $state, $ionicHistory, Auth) {
     $scope.createUser = function (user) {
       $scope.message = null;
       $scope.error = null;
@@ -81,13 +79,12 @@ angular.module('app.controllers', [])
           // Add additional user info
           var fredRef = firebase.database().ref().child('users');
           fredRef.child(firebaseUser.uid).set({
-            name: user.name,
-            mobile: user.mobile
+            name: user.name
           });
           $ionicHistory.nextViewOptions({
             disableBack: true
           });
-          $state.go('app.dash');
+          $state.go('app.dashboard');
         }).catch(function (error) {
         $scope.error = error;
       })
@@ -95,9 +92,7 @@ angular.module('app.controllers', [])
   })
 
   .controller('AccountCtrl', function ($scope) {
-    $scope.settings = {
-      enableFriends: true
-    };
+
   })
 
   .controller('DashCtrl', function ($scope) {

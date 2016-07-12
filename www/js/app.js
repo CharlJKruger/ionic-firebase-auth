@@ -2,10 +2,10 @@
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyDPAbsbJy7rXFaOc0sslZ4HBMZvdCKQb_8",
-  authDomain: "aeonplus.firebaseapp.com",
-  databaseURL: "https://aeonplus.firebaseio.com",
-  storageBucket: "firebase-aeonplus.appspot.com",
+  apiKey: 'AIzaSyB-hLgwcL7b4htI0dVedahAiN3ljBktF5c',
+  authDomain: 'ionic-firebase-auth-6c755.firebaseapp.com',
+  databaseURL: 'https://ionic-firebase-auth-6c755.firebaseio.com',
+  storageBucket: ''
 };
 firebase.initializeApp(config);
 
