@@ -66,6 +66,7 @@ angular.module('app.controllers', [])
     };
 
     // auth with social provider
+    // just a note, can login with facebok and then google. Auth provider will update though cant do it the other way around (Google being sneaky?)
     $scope.singInSocial = function (getProvider) {
       var provider = null;
       $ionicLoading.show({
@@ -102,12 +103,14 @@ angular.module('app.controllers', [])
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
 
-        $ionicPopup.alert({
-          title: 'Woops!',
-          template: '<p>' + errorMessage + '</p><p><strong class="text-center">' + email + '</strong></p>'
-        });
+        if(error.code === 'auth/account-exists-with-different-credential') {
+          $ionicPopup.alert({
+            title: 'Woops!',
+            template: '<p>Please use the same Social account you originally signed up with</p>'
+          });
+        }
 
-        console.log(errorMessage);
+        console.log(errorCode);
       });
     };
   })
