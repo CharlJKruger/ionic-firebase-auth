@@ -1,5 +1,10 @@
 <ion-view view-title="Dashboard">
-  <ion-content class="padding">
+  <ion-content>
+
+    <header>
+      <h1>Welcome</h1>
+    </header>
+
     <h2 class="text-center">
       Hi there!
     </h2>
@@ -7,6 +12,8 @@
     <p class="text-center">
       You are currently singed in as <strong>{{ signedInUser.email }}</strong>
     </p>
+
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJD5E4DV7M3SJ" class="button button-balanced" target="_blank">Donate</a>
 
     <div ng-hide="profile.name" class="text-center">
       <p>

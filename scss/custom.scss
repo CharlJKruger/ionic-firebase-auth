@@ -2,7 +2,15 @@
   display: block;
   margin: 30px auto;
 }
+header {
+  color: white;
+  background-color: #039be5;
+  padding: 15px;
 
+  h1 {
+    color: white;
+  }
+}
 /*
 Form errors
 */
