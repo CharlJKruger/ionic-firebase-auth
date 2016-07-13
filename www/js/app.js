@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 // 'app.controllers' is found in controllers.js
 angular.module('app', [
     'ionic',
+    'ngMessages',
     'firebase',
     'app.routes',
     'app.controllers',

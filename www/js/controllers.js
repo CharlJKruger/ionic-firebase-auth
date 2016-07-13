@@ -88,27 +88,34 @@ angular.module('app.controllers', [])
   })
 
   .controller('CreateUserCtrl', function ($scope, $state, $ionicHistory, Auth) {
-    $scope.createUser = function (user) {
-      $scope.message = null;
-      $scope.error = null;
+    $scope.createUser = function (form, user) {
 
-      // Create a new user
-      Auth.$createUserWithEmailAndPassword(user.email, user.pass)
-        .then(function (firebaseUser) {
-          $scope.message = "User created with uid: " + firebaseUser.uid;
+      console.log('got here');
 
-          // Add additional user info
-          var fredRef = firebase.database().ref().child('users');
-          fredRef.child(firebaseUser.uid).set({
-            name: user.name
-          });
-          $ionicHistory.nextViewOptions({
-            disableBack: true
-          });
-          $state.go('app.dashboard');
-        }).catch(function (error) {
-        $scope.error = error;
-      })
+      if(form.$valid) {
+        $scope.message = null;
+        $scope.error = null;
+
+        // Create a new user
+        Auth.$createUserWithEmailAndPassword(user.email, user.password)
+          .then(function (firebaseUser) {
+            $scope.message = "User created with uid: " + firebaseUser.uid;
+
+            // Add additional user info
+            var fredRef = firebase.database().ref().child('users');
+            fredRef.child(firebaseUser.uid).set({
+              name: user.name,
+              setting: false
+            });
+            $ionicHistory.nextViewOptions({
+              disableBack: true
+            });
+            $state.go('app.dashboard');
+          }).catch(function (error) {
+          $scope.error = error;
+        })
+      }
+
     };
   })
 
