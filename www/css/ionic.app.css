@@ -9822,9 +9822,6 @@ a.button {
 /*
 Form errors
 */
-.error-container {
-  margin: 5px 0; }
-
 .error-container:last-child {
   margin: 5px 0 0; }
 
@@ -9838,14 +9835,14 @@ Form errors
 
 .error i {
   font-size: 24px;
-  color: #B83E2C;
+  color: #ef473a;
   vertical-align: middle; }
 
 .last-error-container > .error {
   padding: 10px 16px 0; }
 
 .has-errors {
-  border-bottom: 3px solid #B83E2C; }
+  border-bottom: 3px solid #ef473a; }
 
 .no-errors {
-  border-bottom: 3px solid green; }
+  border-bottom: 3px solid #33cd5f; }

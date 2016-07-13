@@ -1,51 +1,59 @@
-<ion-view title="Create Account" class="auth" hide-nav-bar="true">
+<ion-view title="Create Account">
+
+  <ion-nav-bar class="bar-stable">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
   <ion-content overflow-scroll="true" padding="true">
 
     <img class="logo" src="img/ionic.png" alt="">
 
     <form name="createForm" novalidate="" ng-submit="createUser(createForm, user)">
 
-      <div class="list">
+      <ion-list>
 
         <!-- name field -->
-        <label class="item item-input"
-               ng-class="{ 'has-errors' : createForm.name.$invalid && !createForm.name.$pristine, 'no-errors' : createForm.name.$valid}">
+        <ion-item class="item-input"
+               ng-class="{ 'has-errors' : createForm.name.$invalid && !createForm.name.$pristine, 'no-errors' : createForm.name.$valid }">
           <span class="input-label">Name</span>
           <input type="text" name="name" ng-model="user.name" ng-minlength="5" ng-maxlength="20" required>
-        </label>
+        </ion-item>
 
         <div class="error-container" ng-show="!createForm.name.$pristine && createForm.name.$error"
              ng-messages="createForm.name.$error">
-          <div ng-messages-include="error-list.html"></div>
+          <div ng-messages-include="templates/auth/form-errors.html"></div>
         </div>
         <!-- /name field -->
 
         <!-- email field -->
-        <label class="item item-input"
-               ng-class="{ 'has-errors' : createForm.email.$invalid && !createForm.email.$pristine, 'no-errors' : createForm.email.$valid}">
+        <ion-item class="item-input"
+               ng-class="{ 'has-errors' : createForm.email.$invalid && !createForm.email.$pristine, 'no-errors' : createForm.email.$valid }">
           <span class="input-label">Email</span>
           <input type="email" name="email" ng-model="user.email" required>
-        </label>
+        </ion-item>
 
-        <div class="error-container" ng-show="createForm.email.$error && !createForm.email.$pristine" ng-messages="createForm.email.$error">
-          <div ng-messages-include="error-list.html"></div>
+        <div class="error-container" ng-show="createForm.email.$error && !createForm.email.$pristine"
+             ng-messages="createForm.email.$error">
+          <div ng-messages-include="templates/auth/form-errors.html"></div>
         </div>
         <!-- /email field -->
 
         <!-- password field -->
-        <label class="item item-input"
-               ng-class="{ 'has-errors' : createForm.password.$invalid && !createForm.password.$pristine && createForm.$submitted, 'no-errors' : createForm.password.$valid  && createForm.$submitted}">
+        <ion-item class="item-input"
+               ng-class="{ 'has-errors' : createForm.password.$invalid && !createForm.password.$pristine && createForm.$submitted, 'no-errors' : createForm.password.$valid  && createForm.$submitted }">
           <span class="input-label">Password</span>
           <input type="password" name="password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
-        </label>
+        </ion-item>
 
-        <div class="error-container last-error-container" ng-show="createForm.password.$error && !createForm.password.$pristine"
+        <div class="error-container last-error-container"
+             ng-show="createForm.password.$error && !createForm.password.$pristine"
              ng-messages="createForm.password.$error">
-          <div ng-messages-include="error-list.html"></div>
+          <div ng-messages-include="templates/auth/form-errors.html"></div>
         </div>
         <!-- /password field -->
 
-      </div>
+      </ion-list>
 
       <button class="button button-full button-positive" type="submit">
         Create Account
@@ -53,54 +61,11 @@
 
     </form>
 
-    <script id="error-list.html" type="text/ng-template">
-      <div class="error" ng-message="required">
-        <i class="ion-information-circled"></i>
-        This field is required.
-      </div>
-      <div class="error" ng-message="email">
-        <i class="ion-information-circled"></i>
-        Please make sure this is a valid email address.
-      </div>
-      <div class="error" ng-message="minlength">
-        <i class="ion-information-circled"></i>
-        Minimum length of this field is 5 characters.
-      </div>
-      <div class="error" ng-message="maxlength">
-        <i class="ion-information-circled"></i>
-        Maximum length of this field is 20 characters.
-      </div>
-    </script>
-
-    <!--<div class="list">-->
-
-    <!--<label class="item item-input">-->
-    <!--<input type="text" placeholder="Name" ng-model="user.name">-->
-    <!--</label>-->
-
-    <!--<br>-->
-
-    <!--<label class="item item-input">-->
-    <!--<input type="email" placeholder="Email" ng-model="user.email">-->
-    <!--</label>-->
-
-    <!--<br/>-->
-
-    <!--<label class="item item-input">-->
-    <!--<input type="password" placeholder="Password" ng-model="user.pass">-->
-    <!--</label>-->
-
-    <!--<br>-->
-
-    <!--<button class="button button-block button-positive login" ng-click="createUser(user)">-->
-    <!--Create account-->
-    <!--</button>-->
-
-    <!--<a class="button button-block button-clear button-positive" href='#/signin'>-->
-    <!--Sign in-->
-    <!--</a>-->
-
-    <!--</div>-->
+    <div class="text-center">
+      <a class="button button-clear button-positive" href='#/signin'>
+        Sign in
+      </a>
+    </div>
 
   </ion-content>
 </ion-view>

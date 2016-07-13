@@ -6,15 +6,16 @@ angular.module('app.controllers', [])
 
     // any time auth state changes, add the user data to scope
     $scope.auth.$onAuthStateChanged(function (firebaseUser) {
+      // access Firebase auth user via signedInUser
       $scope.signedInUser = firebaseUser;
 
       var ref = firebase.database().ref().child('users');
+      // access additional user info in the database via profile
       $scope.profile = $firebaseObject(ref.child(firebaseUser.uid));
-
-      console.log($scope.signedInUser);
 
     });
 
+    // log the user out
     $scope.logout = function () {
       Auth.$signOut();
       $state.go('signIn');
@@ -24,23 +25,29 @@ angular.module('app.controllers', [])
   .controller('SignInCtrl', function ($scope, Auth, $state, $ionicHistory, $ionicLoading, $window, $firebaseAuth, $ionicPopup) {
 
     var auth = $firebaseAuth();
+    $scope.user = {};
 
-    $scope.signIn = function (user) {
-      $ionicLoading.show({
-        template: 'Signing in'
-      });
-      $scope.signedInUser = null;
-      $scope.error = null;
+    // auth with email and password
+    $scope.signIn = function (form, user) {
 
-      auth.$signInWithEmailAndPassword(user.email, user.pass).then(function (firebaseUser) {
-        $scope.signedInUser = firebaseUser;
-        $ionicLoading.hide();
-        $state.go('app.dashboard');
-      }).catch(function (error) {
-        $scope.error = error;
-      });
+      if (form.$valid) {
+        $ionicLoading.show({
+          template: 'Signing in'
+        });
+        $scope.signedInUser = null;
+        $scope.error = null;
+
+        auth.$signInWithEmailAndPassword(user.email, user.password).then(function (firebaseUser) {
+          $scope.signedInUser = firebaseUser;
+          $ionicLoading.hide();
+          $state.go('app.dashboard');
+        }).catch(function (error) {
+          $scope.error = error;
+        });
+      }
     };
 
+    // auth with social provider
     $scope.singInSocial = function (getProvider) {
       var provider = null;
       $ionicLoading.show({
@@ -78,9 +85,9 @@ angular.module('app.controllers', [])
         var credential = error.credential;
 
         $ionicPopup.alert({
-            title: 'Woops!',
-            template: '<p>' + errorMessage + '</p><p><strong class="text-center">' + email + '</strong></p>'
-          });
+          title: 'Woops!',
+          template: '<p>' + errorMessage + '</p><p><strong class="text-center">' + email + '</strong></p>'
+        });
 
         console.log(errorMessage);
       });
@@ -90,9 +97,8 @@ angular.module('app.controllers', [])
   .controller('CreateUserCtrl', function ($scope, $state, $ionicHistory, Auth) {
     $scope.createUser = function (form, user) {
 
-      console.log('got here');
-
-      if(form.$valid) {
+      // if the form is not valid, don't create the user
+      if (form.$valid) {
         $scope.message = null;
         $scope.error = null;
 
@@ -101,15 +107,17 @@ angular.module('app.controllers', [])
           .then(function (firebaseUser) {
             $scope.message = "User created with uid: " + firebaseUser.uid;
 
-            // Add additional user info
+            // Add additional user name and settings
             var fredRef = firebase.database().ref().child('users');
             fredRef.child(firebaseUser.uid).set({
               name: user.name,
               setting: false
             });
+            // dont show back arrow to create view
             $ionicHistory.nextViewOptions({
               disableBack: true
             });
+            // go to the dashboard once created and singed in
             $state.go('app.dashboard');
           }).catch(function (error) {
           $scope.error = error;
