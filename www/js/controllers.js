@@ -42,7 +42,25 @@ angular.module('app.controllers', [])
           $ionicLoading.hide();
           $state.go('app.dashboard');
         }).catch(function (error) {
+          $ionicLoading.hide();
           $scope.error = error;
+
+          console.log(error);
+
+          if(error.code === 'auth/user-not-found') {
+            $ionicPopup.alert({
+              title: 'Woops!',
+              template: '<p>Seems like there is no account registered with that email address.</p>'
+            });
+          }
+
+          if(error.code === 'auth/wrong-password') {
+            $ionicPopup.alert({
+              title: 'Woops!',
+              template: '<p>Seems like you have entered in the wrong password.</p>'
+            });
+          }
+
         });
       }
     };
