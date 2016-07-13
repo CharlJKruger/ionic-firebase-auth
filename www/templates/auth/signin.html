@@ -26,7 +26,7 @@
 
         <!-- password field -->
         <ion-item class="item-input"
-                  ng-class="{ 'has-errors' : singinForm.password.$invalid && !singinForm.password.$pristine && singinForm.$submitted, 'no-errors' : singinForm.password.$valid  && singinForm.$submitted }">
+                  ng-class="{ 'has-errors' : singinForm.password.$invalid && singinForm.$submitted, 'no-errors' : singinForm.password.$valid }">
           <span class="input-label">Password</span>
           <input type="password" name="password" ng-model="user.password" ng-minlength="5" ng-maxlength="20" required>
         </ion-item>
