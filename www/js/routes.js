@@ -56,6 +56,11 @@ angular.module('app.routes', [])
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/app/dashboard');
+    // http://stackoverflow.com/questions/25065699/why-does-angularjs-with-ui-router-keep-firing-the-statechangestart-event
+    // $stateChangeError triggers infinite loop with otherwise('...')
+    $urlRouterProvider.otherwise(function($injector, $location) {
+      var $state = $injector.get("$state");
+      $state.go("app.dashboard");
+    });
 
   });
