@@ -9,6 +9,8 @@ angular.module('app.controllers', [])
       // access Firebase auth user via signedInUser
       $scope.signedInUser = firebaseUser;
 
+      console.log(firebaseUser);
+
       var ref = firebase.database().ref().child('users');
       // access additional user info in the database via profile
       $scope.profile = $firebaseObject(ref.child(firebaseUser.uid));
